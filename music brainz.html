@@ -1,0 +1,26 @@
+<html>
+    <body>
+        <form id="artist" method="GET">
+            <label for="name">Enter Artist Name</label>
+            <input id="name" type="text" name="artist">
+            <input type="submit" value="Go">
+        </form>
+        <script type="text/JavaScript">
+        function queryArtist() {
+            let params = (new URL(document.location)).searchParams;
+            if (params.has('artist')) {
+                let artistName = params.get('artist');
+                console.log(artistName);
+
+            }
+            
+        }
+        window.onload = queryArtist
+
+        </script>
+        <p>
+            <a href="assignment.html">Assignments</a>
+            <a href="index.html">Home</a>
+        </p>
+    </body>
+</html>
