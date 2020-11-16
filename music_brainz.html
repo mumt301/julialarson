@@ -16,10 +16,28 @@
                 if (params.has('artist')) {
                     let artistName = params.get('artist');
                     console.log(artistName);
+
+                    let mbBaseURL = "https://musicbrainz.org/ws/2/";
+                    let mbResource = "artist?query=";
+                    let queryURL = mbBaseURL + mbResource + artistName;
+                    console.log(queryURL);
+
+                    let xmlHTTP = new xmlHTTPRequest();
+                    xmlHTTP.open("GET", queryURL);
+                    xmlHTTP.send();
+                    xmlHTTP.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            let retrievedData = this.responseXML;
+                            console.log(retrievedData);
+                            
+                            
+                        }
+                    }
+
                 }
             
             }
-             window.onload = queryArtist;
+             window.onloasd = queryArtist;
         </script>
         <p>
             <a href="assignment.html">Assignments</a>
