@@ -72,7 +72,7 @@
                         console.log(releaseGroups);
 
                         let releaseTitles = releaseGroups.getElementsByTagName("title")[i]
-                            for (i=0; i < newData.length; i++) {text += newData[i] + "<br>";} 
+                            for (i=0; i < releaseTitles.length; i++) {text += releaseTitles[i] + "<br>";} 
                         console.log(releaseTitles);
                     
 
@@ -82,7 +82,7 @@
                 let placeholder = document.getElementById('placeholder');
                 placeholder.innerHTML = `The data for <b>${artistName}</b> is:
                 <ul>
-                    <li><b>Album name</b> is <i>${artistMBID}</i></li>
+                    <li><b>Album names</b> are <i>${}</i></li>
                     <li><b>Country</b> is <i>${artistCountry}</i></li>
                 </ul>
                 `
