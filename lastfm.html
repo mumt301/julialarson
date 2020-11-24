@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Music Recommendations</title>
+    </head>
+    <body>
+        <div>
+            <form  method="GET">
+                 <label for="trackname">Enter Track Name</label>
+                 <input id="trackname" type="text" name="Track_Name"><br>
+                 <label for="artist">Enter Artist Name</label>
+                 <input type="text" id="artist" name="artistName">
+                <input type="submit" value="Go">
+             </form>
+             <p id="placeholder"></p>
+         </div>
+        <script type="text/JavaScript">
+             const apiKey = "789c0decf1b481652ce44e80cedfc611"
+
+             function queryTrack() {
+                let params = (new URL(document.location)).searchParams;
+                if (params.has('Track_Name')) {
+                    let Track_Name = params.get('Track_Name');
+                    console.log(Track_Name);
+                if (params.has("artistName")) {
+                    let artistName = params.get('artistName');
+                    console.log(artistName);
+                
+                
+                    
+                    let queryURL = "http://ws.audioscrobbler.com/2.0" + "?method=" 
+                    + "track.getSimilar" + "&artist=" + artistName + "&track=" + Track_Name
+                    + "&api_key=" + apiKey;
+                    console.log(queryURL);
+
+                    httpGet (queryURL, getSimTrack)
+                }
+                }
+                }
+             
+             function httpGet (theURL,cbFunction) {
+                 let xmlhttp = new XMLHttpRequest();
+                 xmlhttp.open ("GET", theURL);
+                 xmlhttp.send ();
+                 xmlhttp.onreadystatechange = function () {
+                     if (this.readyState == 4 && this.status == 200) {
+                        cbFunction(this);
+                     }
+                 }
+             }
+             function getSimTrack(xhttp) {
+                for (i=0; i<5; i++) {
+
+                 let retrievedData = xhttp.responseXML;
+                 console.log (retrievedData);
+
+                    let simTracks = retrievedData.getElementsByTagName("track")[i]; 
+                    console.log (simTracks[1]);
+                 
+                    let MBIDs = simTracks[1].getElementsByTagName("mbid").innerhtml;
+                    console.log(MBIDs); 
+
+                    let queryURL2 = "https://ws.audioscrobbler.com/2.0/" + "?method=artist.gettopalbums&mbid=" + MBIDs + "&api_key=" + apiKey;
+                console.log(queryURL2);
+                }
+
+
+             }
+                 
+             
+            window.onload = queryTrack;
+        </script>
+        
+    </body>
+</html>
+
+                
